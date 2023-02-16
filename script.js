@@ -5,4 +5,4 @@ const body = document.body
 body.style.background = '#000'
 
 const button = document.querySelector('button')
-is(button) button.click()
+if(button) button.click()
