@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VejaMais</title>
+</head>
+<style>
+ .texto p {
+  text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+   max-width: 500px;
+}
+</style>
+<body>
+  <div class="texto">
+    <p>Aqui está um texto que tem mais de 100 letras e será cortado para exibir apenas os primeiros 50 caracteres. Quando o botão "Mostrar mais" for clicado, as próximas 50 letras serão exibidas.</p>
+    <!-- <p class="mais">Texto adicional que será exibido quando o botão for clicado.</p> -->
+    <!-- <button id="botao" onclick="mostrarMais()">Mostrar mais</button> -->
+  </div>
+
+  
+  <script>
+
+window.addEventListener("load", (event) => {
+  const texto = document.querySelector('.texto>p')
+  const totalPalavras = texto.innerHTML.length
+  console.log('total' , totalPalavras)
+  if(totalPalavras > 50){
+    console.log('passou')
+  }
+});
+
+
+//     function mostrarMais() {
+//   var maisTexto = document.querySelector(".mais");
+//   var botao = document.querySelector("#botao");
+  
+//   if (maisTexto.style.display === "none") {
+//     maisTexto.style.display = "block";
+//     botao.innerHTML = "Mostrar menos";
+//   } else {
+//     maisTexto.style.display = "none";
+//     botao.innerHTML = "Mostrar mais";
+//   }
+// }
+
+// var texto = document.querySelector(".texto p");
+// var corte = texto.textContent.substring(0, 50); // corta o texto para exibir apenas os primeiros 50 caracteres
+// var maisTexto = document.querySelector(".mais");
+// var resto = texto.textContent.substring(50); // guarda o restante do texto para ser exibido quando o botão for clicado
+
+// texto.innerHTML = corte + '<span class="pontos">...</span><span class="resto">' + resto + '</span>'; // insere o HTML formatado para o texto truncado
+
+// if (resto.length > 0) {
+//   maisTexto.innerHTML = '<span class="resto">' + resto + '</span>'; // insere o HTML formatado para o texto adicional
+//   maisTexto.style.display = "none"; // inicialmente oculta o texto adicional
+//   var botao = document.querySelector("#botao");
+//   botao.style.display = "block"; // exibe o botão "Mostrar mais"
+// }
+
+  </script>
+  <script src="./script.js"></script>
+  <script src="./script2.js"></script>
+</body>
+</html>
