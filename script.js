@@ -77,3 +77,85 @@ function Teste(value) {
         console.log('esse é o Design');
     }
 }
+// OBS: interface quando for OBJETO
+async function fetchProduct() {
+    const response = await fetch('https://api.origamid.dev/json/notebook.json');
+    const data = await response.json();
+    console.log('data ', data);
+    showProduct(data);
+}
+fetchProduct();
+function showProduct(data) {
+    document.body.innerHTML += `
+  <div>
+   <h1>Fetch</h1>
+   <h2>Nome: ${data.nome}</h2>
+   <h2>Garantia: ${data.garantia}</h2>
+   <h2>Preço: ${data.preco}</h2>
+   <h2>Seguro Acidentes: ${data.seguroAcidentes}</h2>
+   <hr/>
+   <p>Fabricante Fundação: ${data.empresaFabricante.fundacao} </p>
+   <p>Fabricante Nome: ${data.empresaFabricante.nome} </p>
+   <p>Fabricante Pais: ${data.empresaFabricante.pais} </p>
+   <hr/>
+   <p>Montadora Fundação: ${data.empresaMontadora.fundacao} </p>
+   <p>Montadora Nome: ${data.empresaMontadora.nome} </p>
+   <p>Montadora Pais: ${data.empresaMontadora.pais} </p>
+   <hr/>
+  </div>`;
+}
+//ARRAY []
+const numeros = [10, 2, 3, 4, 5, 6, 7, 8, 20, 40, 100];
+function compararNumeros(data) {
+    return data.filter((n) => n > 10);
+}
+function compararValores(data) {
+    return data.filter((n) => n > 10);
+}
+console.log('compararNumeros 1', compararNumeros([100, 20]));
+console.log('compararNumeros 2', compararNumeros(numeros));
+console.log('compararValores 2', compararValores(numeros));
+async function getFectch() {
+    const response = await fetch('https://api.origamid.dev/json/cursos.json');
+    const data = await response.json();
+    console.log('data getFectch', data);
+    showGetFecth(data);
+}
+getFectch();
+function showGetFecth(data) {
+    data.map((da) => (document.body.innerHTML += `
+      <h4>NOME: ${da.nome}</h4>
+      <h6>AULAS: ${da.aulas}</h6>
+      <h5>TIPO: ${da.gratuito ? 'Gratuito' : 'Pago'}</h5>
+      <h1 style="color:${da.nivel === 'iniciante' ? 'blue' : 'red'}">NIVEL: ${da.nivel === 'iniciante' ? 'Iniciante' : 'Avançado'}</h1>
+      <p>TAGS: ${da.tags.join(", ")}</p>
+      <p>AULAS: ${da.idAulas.join(" | ")}</p>
+      `));
+}
+const punto = {};
+if (punto) {
+    punto?.roda?.toFixed();
+}
+const fiat500 = {};
+fiat500?.roda?.toLocaleString();
+class Doces {
+    nome;
+    preco;
+    constructor(nome, preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+    precoDoce() {
+        return `R$ ${this.preco}`;
+    }
+}
+const acucar = new Doces('os doces é uma docura', 200);
+console.log(acucar.precoDoce());
+const link = document.getElementById('origamid');
+if (link instanceof HTMLAnchorElement) {
+    link.href = link.href.replace('http://', 'htpps://');
+}
+const video = document.getElementById('videoprincipal');
+if (video instanceof HTMLVideoElement) {
+    console.log('volume do video: ', video.volume);
+}

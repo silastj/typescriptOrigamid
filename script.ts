@@ -1,7 +1,7 @@
-function somar(b: number): number{
-  return  b
+function somar(b: number): number {
+  return b
 }
-console.log('somar',somar(10))
+console.log('somar', somar(10))
 
 // DECLARANDO TIPOS
 
@@ -18,7 +18,7 @@ const objeto: {
 
 const barato: boolean | string = valor < 400 ? true : 'Caro'
 
-function normalizarTexto(texto: string){
+function normalizarTexto(texto: string) {
   return texto.trim().toLowerCase()
 }
 console.log(normalizarTexto('Silas   '))
@@ -28,10 +28,10 @@ console.log(normalizarTexto('Silas   '))
 let total: string | number = 200
 console.log(total = 'silas')
 
-function isNumber(value: string | number){
-  if(typeof value === 'string'){
+function isNumber(value: string | number) {
+  if (typeof value === 'string') {
     return `${value} é string`
-  }else{
+  } else {
     return `${value} é number`
   }
 }
@@ -40,12 +40,12 @@ console.log(isNumber('100'))
 const button = document.querySelector('button')
 button?.click() // optional chaining // se existir o button vc aciona a function click() 
 
-function toNumber(value: number | string){
-  if(typeof value === "number") {
+function toNumber(value: number | string) {
+  if (typeof value === "number") {
     return console.log(value)
-  }else if(typeof value === "string") {
+  } else if (typeof value === "string") {
     return console.log(value)
-  }else {
+  } else {
     throw console.log("value dever ser um número ou uma string")
   }
 }
@@ -58,8 +58,8 @@ function preencherDados(dados: {
   nome: string,
   preco: number,
   teclado: boolean
-}){
- document.body.innerHTML += `
+}) {
+  document.body.innerHTML += `
   <h2>Nome: ${dados.nome}</h2>
   <h3>Preço: ${dados.preco}</h3>
   <h6>Possui teclado: ${dados.teclado ? 'sim' : 'não'}</h6>
@@ -67,13 +67,13 @@ function preencherDados(dados: {
 }
 
 preencherDados({
-  nome:'Computador',
+  nome: 'Computador',
   preco: 100,
   teclado: true
 })
 
 preencherDados({
-  nome:'Televisão',
+  nome: 'Televisão',
   preco: 900,
   teclado: false
 })
@@ -85,7 +85,13 @@ type Produto = {
   teclado: boolean
 }
 
-function newPreencherDados(dados:Produto) {
+interface Produtos {
+  nome: string,
+  preco: number,
+  teclado: boolean
+}
+
+function newPreencherDados(dados: Produto | Produtos) {
   document.body.innerHTML += `
   <h2>Nome: ${dados.nome}</h2>
   <h3>Preço: ${dados.preco}</h3>
@@ -94,15 +100,149 @@ function newPreencherDados(dados:Produto) {
 }
 
 newPreencherDados({
-  nome:'New Televisão',
+  nome: 'New Televisão',
   preco: 900,
   teclado: false
 })
 
 type Categorias = 'design' | 'codigo' | 'descod'
 
-function Teste(value:Categorias){
-  if(value === 'design'){
+function Teste(value: Categorias) {
+  if (value === 'design') {
     console.log('esse é o Design')
   }
+}
+// OBS: interface quando for OBJETO
+
+async function fetchProduct() {
+  const response = await fetch('https://api.origamid.dev/json/notebook.json');
+  const data = await response.json()
+  console.log('data ', data)
+  showProduct(data)
+}
+interface Products {
+  nome: string,
+  descricao: string,
+  empresaFabricante: EmpresaFabricante,
+  empresaMontadora: EmpresaMontadora,
+  garantia: string,
+  preco: number,
+  seguroAcidentes: boolean
+}
+
+interface EmpresaFabricante {
+  fundacao: number,
+  nome: string,
+  pais: string
+}
+
+interface EmpresaMontadora {
+  fundacao: number,
+  nome: string,
+  pais: string
+}
+
+fetchProduct();
+function showProduct(data: Products) {
+  document.body.innerHTML += `
+  <div>
+   <h1>Fetch</h1>
+   <h2>Nome: ${data.nome}</h2>
+   <h2>Garantia: ${data.garantia}</h2>
+   <h2>Preço: ${data.preco}</h2>
+   <h2>Seguro Acidentes: ${data.seguroAcidentes}</h2>
+   <hr/>
+   <p>Fabricante Fundação: ${data.empresaFabricante.fundacao} </p>
+   <p>Fabricante Nome: ${data.empresaFabricante.nome} </p>
+   <p>Fabricante Pais: ${data.empresaFabricante.pais} </p>
+   <hr/>
+   <p>Montadora Fundação: ${data.empresaMontadora.fundacao} </p>
+   <p>Montadora Nome: ${data.empresaMontadora.nome} </p>
+   <p>Montadora Pais: ${data.empresaMontadora.pais} </p>
+   <hr/>
+  </div>`
+}
+//ARRAY []
+
+const numeros = [10,2,3,4,5,6,7,8,20,40,100]
+function compararNumeros(data: number[]){
+  return data.filter((n) => n > 10)
+}
+function compararValores(data: Array<number>){
+  return data.filter((n) => n > 10)
+}
+
+console.log('compararNumeros 1',compararNumeros([100,20]))
+console.log('compararNumeros 2',compararNumeros(numeros))
+console.log('compararValores 2',compararValores(numeros))
+
+interface Estudos {
+  aulas: number,
+  gratuito: boolean,
+  horas: number,
+  idAulas: Array<number>,
+  nivel: string,
+  nome: string,
+  tags: Array<string>
+}
+
+async function getFectch() {
+  const response = await fetch('https://api.origamid.dev/json/cursos.json');
+  const data = await response.json()
+  console.log('data getFectch', data)
+  showGetFecth(data)
+}
+
+getFectch()
+function showGetFecth(data: Estudos[]){  
+    data.map((da: Estudos) => (
+      document.body.innerHTML +=`
+      <h4>NOME: ${da.nome}</h4>
+      <h6>AULAS: ${da.aulas}</h6>
+      <h5>TIPO: ${da.gratuito ? 'Gratuito' : 'Pago'}</h5>
+      <h1 style="color:${da.nivel === 'iniciante' ? 'blue' : 'red'}">NIVEL: ${da.nivel === 'iniciante' ? 'Iniciante' : 'Avançado'}</h1>
+      <p>TAGS: ${da.tags.join(", ")}</p>
+      <p>AULAS: ${da.idAulas.join(" | ")}</p>
+      `
+    ))
+}
+interface Carros {
+  roda?: number
+}
+
+const punto: Carros = {}
+
+if(punto){
+  punto?.roda?.toFixed()
+}
+
+const fiat500: Carros = {}
+fiat500?.roda?.toLocaleString()
+
+class Doces {
+  nome: string;
+  preco: number;
+  constructor(nome: string, preco: number){
+    this.nome = nome;
+    this.preco = preco
+  }
+
+  precoDoce() {
+    return `R$ ${this.preco}`
+  }
+}
+
+const acucar = new Doces('os doces é uma docura', 200)
+console.log(acucar.precoDoce())
+
+
+const link = document.getElementById('origamid')
+
+if(link instanceof HTMLAnchorElement){
+  link.href = link.href.replace('http://', 'htpps://')
+}
+
+const video = document.getElementById('videoprincipal')
+if(video instanceof HTMLVideoElement) {
+  console.log('volume do video: ',video.volume)
 }
