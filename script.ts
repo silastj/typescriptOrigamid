@@ -246,3 +246,104 @@ const video = document.getElementById('videoprincipal')
 if(video instanceof HTMLVideoElement) {
   console.log('volume do video: ',video.volume)
 }
+
+const links = document.querySelectorAll('.link')
+console.log('links ', links)
+
+function ativarElemento(elemento: HTMLElement){
+  elemento.style.color = 'red'
+  elemento.style.border = '1px solid red'
+}
+
+links.forEach((link) => {
+ if(link instanceof HTMLElement){
+  ativarElemento(link)
+ }
+})
+
+const botao = document.querySelector('button')
+console.log('botao ', botao)
+function handleClick(event: PointerEvent){
+  console.log('Event ', event)
+}
+
+function handleCLico(this: HTMLButtonElement, event: MouseEvent){
+  console.log(this)
+}
+// ou
+function handleClic(event: MouseEvent){
+  if(event.currentTarget instanceof HTMLElement){
+    console.log(event.currentTarget.innerText)
+  }
+}
+
+botao?.addEventListener('pointerdown', handleClick)
+
+botao?.addEventListener('click', handleCLico)
+botao?.addEventListener('click', handleClic)
+
+// GENERIC
+// ele é um tipo generico, se mandar string ele identifica, se mandar number ele identifica
+function geral<variavel>(a: variavel): variavel {
+  return a;
+}
+
+console.log(geral<string>('retorna string'))
+console.log(geral<number>(1200))
+console.log(geral<boolean>(true))
+
+///
+const listNumbers = [1,2,3,4,5,6,7,8,9,10]
+const fruts =['banana','maça','morango', 'uva', 'goiaba', 'limão']
+
+function forceFive<TipoLista>(lista: TipoLista[]): TipoLista[]{
+  return lista.slice(0,5)
+}
+
+console.log('forceFive numbers:', forceFive(listNumbers))
+console.log('forceFive fruts:', forceFive(fruts))
+
+function notNull<T>(arg: T){
+  if(arg !== null) return arg;
+  else return null
+}
+
+console.log('notNull', notNull('uma string')?.toLowerCase())
+console.log('not Null',notNull(200)?.toFixed())
+///////////////////////////////
+
+function geraString(el: HTMLElement) {
+  return el.innerHTML
+}
+const tagLink = document.querySelector('a')
+console.log('tagLink ', tagLink)
+if(tagLink){
+  console.log('geralString', geraString(tagLink))
+}
+//OUTRA FORMA
+
+function geraElement<Tipo extends HTMLElement>(elemento:Tipo){
+return {
+  texto: elemento.innerText,
+  elemento
+}
+}
+if(tagLink){
+  console.log('geraElement', geraElement(tagLink).elemento.href)
+}
+
+function getLink<Tipo extends Element>(seletor: string): Tipo | null {
+  return document.querySelector(seletor)
+}
+
+const resLink = getLink<HTMLAnchorElement>('a')?.href
+console.log('RESLINK ', resLink)
+
+// PODEMOS FAZER A TIPAGEM QUANDO PEGAR O LINK
+
+const newLink = document.querySelector<HTMLAnchorElement>('a')
+if(newLink instanceof HTMLAnchorElement){
+  console.log('newLink: ', newLink?.href)
+}
+
+//////////////
