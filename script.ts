@@ -347,3 +347,43 @@ if(newLink instanceof HTMLAnchorElement){
 }
 
 //////////////
+//FUNCTION
+// toda função que retorna undefined tem um retorno de void
+// never ff
+function pintarTela(cor: string){
+  document.body.style.background = cor
+}
+pintarTela('red')
+
+function soma(a:number, b:number, c?:number): number{
+  return a + b + (c ? c : 0)
+}
+console.log('somar', somar(2))
+
+//function OVERLOAD
+function testeString(texto: string): string;
+function testeString(texto: string[]): string[];
+function testeString(texto: string | string[]): string | string[] {
+ if(typeof texto === 'string'){
+  return texto.trim().toLowerCase()
+ } else{
+  return texto.map((item) => item.trim().toLowerCase())
+ }
+}
+console.log(testeString('Produto').toUpperCase());
+
+function roundedUp(valor: string):string
+function roundedUp(valor: number):number
+function roundedUp(valor: number | string ): number | string{
+  if(typeof valor === 'string'){
+    return Math.ceil(Number(valor)).toString()
+  }else {
+    return Math.ceil(valor)
+  }
+}
+
+console.log('roundeUp' ,roundedUp('100'))
+console.log('roundeUp' ,roundedUp(200).toLocaleString)
+
+//Type Guard e Control Flow
+

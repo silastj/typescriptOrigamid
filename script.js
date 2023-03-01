@@ -241,3 +241,34 @@ if (newLink instanceof HTMLAnchorElement) {
     console.log('newLink: ', newLink?.href);
 }
 //////////////
+//FUNCTION
+// toda função que retorna undefined tem um retorno de void
+// never ff
+function pintarTela(cor) {
+    document.body.style.background = cor;
+}
+pintarTela('red');
+function soma(a, b, c) {
+    return a + b + (c ? c : 0);
+}
+console.log('somar', somar(2));
+function testeString(texto) {
+    if (typeof texto === 'string') {
+        return texto.trim().toLowerCase();
+    }
+    else {
+        return texto.map((item) => item.trim().toLowerCase());
+    }
+}
+console.log(testeString('Produto').toUpperCase());
+function roundedUp(valor) {
+    if (typeof valor === 'string') {
+        return Math.ceil(Number(valor)).toString();
+    }
+    else {
+        return Math.ceil(valor);
+    }
+}
+console.log('roundeUp', roundedUp('100'));
+console.log('roundeUp', roundedUp(200).toLocaleString);
+//Type Guard e Control Flow
