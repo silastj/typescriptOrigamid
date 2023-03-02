@@ -266,9 +266,27 @@ function roundedUp(valor) {
         return Math.ceil(Number(valor)).toString();
     }
     else {
-        return Math.ceil(valor);
+        return Math.ceil(valor).toFixed(1);
     }
 }
-console.log('roundeUp', roundedUp('100'));
-console.log('roundeUp', roundedUp(200).toLocaleString);
+console.log('roundeUp', roundedUp('100')); // roundeUp 100
+console.log('roundeUp', roundedUp(200)); // roundeUp 200.0
 //Type Guard e Control Flow
+// é a verificação de tipos string number ou stanceof 
+const obj = {
+    nome: 'Silas'
+};
+if ('nome' in obj) {
+    console.log('tem sim o nome no Objeto.');
+}
+async function pegarProduto() {
+    const response = await fetch('https://api.origamid.dev/json/notebook.json');
+    const data = await response.json();
+    printProduct(data);
+}
+pegarProduto();
+function printProduct(data) {
+    if ('nome' in data) {
+        console.log('tem mome dentro do Produto Notebook: ', data);
+    }
+}

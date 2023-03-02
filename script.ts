@@ -378,12 +378,74 @@ function roundedUp(valor: number | string ): number | string{
   if(typeof valor === 'string'){
     return Math.ceil(Number(valor)).toString()
   }else {
-    return Math.ceil(valor)
+    return Math.ceil(valor).toFixed(1)
   }
 }
 
-console.log('roundeUp' ,roundedUp('100'))
-console.log('roundeUp' ,roundedUp(200).toLocaleString)
+console.log('roundeUp' ,roundedUp('100')) // roundeUp 100
+console.log('roundeUp' ,roundedUp(200)) // roundeUp 200.0
 
 //Type Guard e Control Flow
+// é a verificação de tipos string number ou stanceof 
+const obj = {
+  nome: 'Silas'
+}
+if('nome' in obj){
+  console.log('tem sim o nome no Objeto.')
+}
 
+async function pegarProduto(){
+  const response = await fetch('https://api.origamid.dev/json/notebook.json')
+  const data = await response.json()
+  printProduct(data)
+}
+
+pegarProduto()
+
+interface Produ {
+  nome: string;
+  preco: number;
+}
+
+function printProduct(data: Produ){
+  if('nome' in data){
+    console.log('tem mome dentro do Produto Notebook: ', data)
+  }
+}
+//UNKNOWN
+ function tratarDados(value: unknown){
+  if(typeof value === 'string'){
+    return value.toLowerCase()
+  }
+  if(typeof value === 'number'){
+    return value.toFixed()
+  }
+  if(value instanceof HTMLElement){
+    return value.innerText
+  }
+
+ }
+
+ console.log('tratarDados', tratarDados('silas'))
+ console.log('tratarDados', tratarDados(200))
+ console.log('tratarDados', tratarDados(document.body))
+
+ // TYPEGUARD
+ // verificando se é um array
+
+ async function getCursos(){
+  const response = await fetch('https://api.origamid.dev/json/curson.json')
+  const data = await response.json()
+  convertCursos(data)
+ }
+
+ getCursos()
+
+ function convertCursos(data: unknown){
+  if(data instanceof Array){
+    console.log('Isso é um Array')
+  }
+  if(Array.isArray(data)){
+    console.log('É um array')
+  }
+ }
