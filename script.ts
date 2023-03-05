@@ -449,3 +449,70 @@ function printProduct(data: Produ){
     console.log('É um array')
   }
  }
+ //TYPE ASSERTION
+ // temos os as e !
+
+ const videos = document.querySelector('video')!
+ console.log('videos.volume', videos.volume)
+
+ const vide = document.querySelector('video') as HTMLVideoElement
+ const vides = <HTMLVideoElement>document.querySelector('video')
+ const videss = document.querySelector<HTMLVideoElement>('video')
+ const vide10 = document.querySelector('video') as HTMLVideoElement
+ (vide10 as HTMLVideoElement).volume
+ console.log('vide ', vide)
+
+
+ //DESTRUCTURING
+ const { body }: {body: HTMLElement} = document
+ console.log('body ', body)
+
+
+ function compararPrecos(tipo: "menor" | "maior", ...valores: number[]){
+  if(tipo === 'menor'){
+    return Math.min(...valores)
+  }
+  if(tipo === 'maior'){
+    return Math.max(...valores)
+  }
+ }
+ console.log(`compararPrecos menor`, compararPrecos("menor", 100,10,20))
+ console.log(`compararPrecos maior`, compararPrecos("maior", 100,10,20))
+ console.log(`compararPrecos maior`, compararPrecos("maior", 1000,1000000,200000000))
+
+ //INTERSECTION
+ // Entra o & comercial podendo usar mais de um tipo
+
+ type Product = {
+  preco: number
+ }
+
+ type Car = {
+  modelo: string,
+  portas: number,
+  rodas: number
+ }
+
+ function ProductCar(dados: Product & Car){
+  return `O carro do modelo ${dados.modelo},tem ${dados.portas} portas, com ${dados.rodas} rodas, e com preço R$${dados.preco}`
+ }
+
+ console.log('ProductCar', ProductCar({modelo:' fiat 500', portas:5, rodas: 4, preco:100}))
+
+ // caso eu não tiver acesso a esse tipo, fosse de terceiro, podemos pegar os tipos e extender ao seu tipo.
+
+ type TiposTerceiro = {
+  preco: number,
+  nome: string
+ }
+
+ type MeusTipos = TiposTerceiro & {
+  sobrenome: string
+ }
+
+ function TerceiroLocal(dados: MeusTipos){
+  return `${dados.nome} ${dados.sobrenome} ${dados.preco}`
+ }
+
+
+ 

@@ -290,3 +290,65 @@ function printProduct(data) {
         console.log('tem mome dentro do Produto Notebook: ', data);
     }
 }
+//UNKNOWN
+function tratarDados(value) {
+    if (typeof value === 'string') {
+        return value.toLowerCase();
+    }
+    if (typeof value === 'number') {
+        return value.toFixed();
+    }
+    if (value instanceof HTMLElement) {
+        return value.innerText;
+    }
+}
+console.log('tratarDados', tratarDados('silas'));
+console.log('tratarDados', tratarDados(200));
+console.log('tratarDados', tratarDados(document.body));
+// TYPEGUARD
+// verificando se é um array
+async function getCursos() {
+    const response = await fetch('https://api.origamid.dev/json/curson.json');
+    const data = await response.json();
+    convertCursos(data);
+}
+getCursos();
+function convertCursos(data) {
+    if (data instanceof Array) {
+        console.log('Isso é um Array');
+    }
+    if (Array.isArray(data)) {
+        console.log('É um array');
+    }
+}
+//TYPE ASSERTION
+// temos os as e !
+const videos = document.querySelector('video');
+console.log('videos.volume', videos.volume);
+const vide = document.querySelector('video');
+const vides = document.querySelector('video');
+const videss = document.querySelector('video');
+const vide10 = document.querySelector('video');
+vide10.volume;
+console.log('vide ', vide);
+//DESTRUCTURING
+const { body } = document;
+console.log('body ', body);
+function compararPrecos(tipo, ...valores) {
+    if (tipo === 'menor') {
+        return Math.min(...valores);
+    }
+    if (tipo === 'maior') {
+        return Math.max(...valores);
+    }
+}
+console.log(`compararPrecos menor`, compararPrecos("menor", 100, 10, 20));
+console.log(`compararPrecos maior`, compararPrecos("maior", 100, 10, 20));
+console.log(`compararPrecos maior`, compararPrecos("maior", 1000, 1000000, 200000000));
+function ProductCar(dados) {
+    return `O carro do modelo ${dados.modelo},tem ${dados.portas} portas, com ${dados.rodas} rodas, e com preço R$${dados.preco}`;
+}
+console.log('ProductCar', ProductCar({ modelo: ' fiat 500', portas: 5, rodas: 4, preco: 100 }));
+function TerceiroLocal(dados) {
+    return `${dados.nome} ${dados.sobrenome} ${dados.preco}`;
+}
